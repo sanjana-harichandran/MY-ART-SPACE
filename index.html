@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sanjana — Content Creator & Web Dev Student</title>
+  <meta name="description" content="Portfolio of Sanjana: social media content, video edits, Canva designs and digital art. Web Development student at SRH Berlin.">
+  <meta property="og:title" content="Sanjana — Content Creator & Web Dev Student">
+  <meta property="og:description" content="Video edits, designs and digital art, plus content ideas for international student marketing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a href="#top" class="logo" data-field="shortName">Sanjana</a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#ideas">Ideas</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero wrap">
+      <p class="eyebrow"><span class="dot"></span> Open to working student roles in Berlin</p>
+      <h1>Hi, I'm <span class="hl" data-field="shortName">Sanjana</span>.<br>I make content people <em>stop scrolling</em> for.</h1>
+      <p class="lead" data-field="tagline"></p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">See my work</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+      <ul class="tools" id="tools"></ul>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" class="section wrap">
+      <div class="section-head">
+        <h2>Selected work</h2>
+        <div class="filters" role="tablist" aria-label="Filter work">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="video">Video</button>
+          <button class="chip" data-filter="design">Design</button>
+          <button class="chip" data-filter="art">Digital art</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- IDEAS -->
+    <section id="ideas" class="section ideas-band">
+      <div class="wrap">
+        <div class="section-head stack">
+          <p class="eyebrow light">Pitched for SRH International College</p>
+          <h2>3 content ideas I'd love to make for you</h2>
+          <p class="sub">I just went through applying, moving and settling in Berlin as an international student, so these come from real questions I had.</p>
+        </div>
+        <div class="ideas" id="ideas-list"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section wrap about">
+      <div>
+        <h2>About me</h2>
+        <div class="about-text" id="about-text"></div>
+      </div>
+      <dl class="facts" id="facts"></dl>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section wrap contact">
+      <h2>Let's make something.</h2>
+      <p class="sub">The fastest way to reach me is email.</p>
+      <a class="btn btn-primary big" id="email-btn" href="#">Email me</a>
+      <ul class="socials" id="socials"></ul>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Built with HTML, CSS & JavaScript · Hosted on GitHub Pages · <span id="year"></span></p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Preview" hidden>
+    <button class="lb-close" id="lb-close" aria-label="Close preview">×</button>
+    <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous slide">‹</button>
+    <div class="lb-media" id="lb-media"></div>
+    <button class="lb-nav lb-next" id="lb-next" aria-label="Next slide">›</button>
+    <div class="lb-count" id="lb-count"></div>
+    <div class="lb-caption" id="lb-caption"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
