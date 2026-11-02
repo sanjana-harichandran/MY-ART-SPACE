@@ -12,7 +12,7 @@ const PORTFOLIO = {
     { label: "GitHub", url: "https://github.com/sanjana-harichandran/MY-ART-SPACE" },
   ],
 
-  tools: ["CapCut", "Canva", "Procreate", "Instagram Reels", "TikTok", "HTML / CSS / JavaScript", "Teamwork & events"],
+  tools: ["CapCut", "Canva", "Procreate", "Instagram Reels", "HTML / CSS / JavaScript", "Teamwork & events"],
 
   about: [
     "I'm Sanjana, from India and now in Berlin, studying for a Bachelor's in Web Development at SRH Berlin. I'm also part of the campus student ambassador team, welcoming new students and representing the university.",
@@ -33,7 +33,7 @@ const PORTFOLIO = {
      img:   path to an image, e.g. "assets/images/poster.jpg" (also used as video cover)
      video: path to an mp4, e.g. "assets/videos/reel1.mp4"   (optional)
      youtube: a YouTube video ID, e.g. "dQw4w9WgXcQ"           (optional)
-     link:  an Instagram/TikTok URL                            (optional)
+     link:  an Instagram URL                                   (optional)
      stat:  e.g. "12k views" — remove if you don't have one
      Leave img empty ("") to show a placeholder. */
   work: [
@@ -76,7 +76,7 @@ const PORTFOLIO = {
     {
       title: "\"Things nobody told me before moving to Berlin\"",
       hook: "\"I moved from India to Berlin 2 months ago. Here are 5 things I wish I'd known…\"",
-      format: "Reel / TikTok series, 30–45 sec",
+      format: "Instagram Reel series, 30–45 sec",
       audience: "Prospective students in India & South Asia",
       why: "Relatable, honest and easy to share. It builds trust before people apply.",
     },
@@ -178,7 +178,7 @@ function openPhotos(i) {
 }
 function step(d) { if (!gal) return; gi = (gi + d + gal.list.length) % gal.list.length; showSlide(); }
 function openItem(w) {
-  // Instagram/TikTok links with no local video: open in a new tab
+  // Instagram links with no local video: open in a new tab
   if (w.link && !w.video && !w.youtube) { window.open(w.link, "_blank", "noopener"); return; }
   let media;
   if (w.youtube) media = `<iframe src="https://www.youtube-nocookie.com/embed/${esc(w.youtube)}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen title="${esc(w.title)}"></iframe>`;
