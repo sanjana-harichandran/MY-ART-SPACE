@@ -37,8 +37,10 @@ const PORTFOLIO = {
      stat:  e.g. "12k views" — remove if you don't have one
      Leave img empty ("") to show a placeholder. */
   work: [
+    { type: "video", title: "SRH Connect 2026", tool: "Event reel", desc: "Recap of SRH Connect 2026 on 1 Nov, which I attended as a student ambassador: talks, alumni success stories and campus atmosphere.", img: "assets/images/srh-connect-2026-cover.jpg", video: "assets/videos/srh-connect-2026.mp4" },
     { type: "video", title: "Autumn walk", tool: "CapCut", desc: "Short cinematic reel of an autumn walk by the water, shot on my phone and edited in CapCut.", img: "assets/images/video-2-cover.jpg", video: "assets/videos/video-2.mp4" },
     { type: "video", title: "Golden streets", tool: "CapCut", desc: "Autumn street scenes cut into a calm, seasonal mood reel.", img: "assets/images/video-1-cover.jpg", video: "assets/videos/video-1.mp4" },
+    { type: "video", title: "Along the Spree", tool: "Phone video", desc: "Wide-angle walk along the Spree past Berlin's government buildings on a clear autumn day.", img: "assets/images/spree-walk-cover.jpg", video: "assets/videos/spree-walk.mp4" },
     { type: "design", title: "Year-End Recap 2025", tool: "Canva", desc: "Scrapbook-style cover for an Instagram year-in-review carousel.", img: "assets/images/wrapped-poster.jpg" },
     { type: "design", title: "Die FilterFlasche", tool: "Canva · in German", desc: "8-slide product pitch for a sustainable filter bottle: problem, product, target groups and call to action.", img: "assets/images/filterflasche-1.jpg", wide: true, stat: "8 slides · click to browse",
       gallery: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `assets/images/filterflasche-${n}.jpg`) },
@@ -48,6 +50,27 @@ const PORTFOLIO = {
     { type: "art", title: "Black cat", tool: "Procreate animation", desc: "Frame-by-frame animated GIF of a blinking black cat.", img: "assets/images/black-cat.gif" },
     { type: "art", title: "Chocochip cookie recipe", tool: "Procreate", desc: "Illustrated single-serve recipe card with hand-drawn ingredients.", img: "assets/images/choco-cookie.jpg" },
   ],
+
+  /* PHOTOS: shown in the "Photography" section. src = full size, thumb = small preview */
+  photos: [
+    ["festival-of-lights-gate", "Brandenburg Gate, Festival of Lights"],
+    ["berliner-dom", "Berliner Dom"],
+    ["red-tree", "Red tree by the Spree"],
+    ["golden-street", "Golden autumn street"],
+    ["srh-connect-2026", "SRH Connect 2026"],
+    ["festival-of-lights-dom", "Berliner Dom, Festival of Lights"],
+    ["tv-tower", "TV Tower framed by autumn leaves"],
+    ["spree-bridge", "Spree river and bridge"],
+    ["cafe-lanterns", "Café lanterns"],
+    ["sunset", "Berlin sunset"],
+    ["autumn-church", "Church in autumn"],
+    ["tree-avenue", "Tree-lined avenue"],
+    ["brandenburg-gate", "Brandenburg Gate by day"],
+    ["scooter-street", "Neighbourhood street"],
+    ["dom-and-trees", "Berliner Dom from the park"],
+    ["autumn-sidewalk", "Autumn sidewalk"],
+    ["autumn-facade", "Autumn facade"],
+  ].map(([n, title]) => ({ src: `assets/photos/${n}.jpg`, thumb: `assets/photos/thumb-${n}.jpg`, title })),
 
   ideas: [
     {
@@ -102,6 +125,10 @@ $("#ideas-list").innerHTML = PORTFOLIO.ideas
   )
   .join("");
 
+$("#photo-grid").innerHTML = PORTFOLIO.photos
+  .map((p, i) => `<button class="photo${i >= 8 ? " extra" : ""}" data-i="${i}" aria-label="Open photo: ${esc(p.title)}"><img src="${esc(p.thumb)}" alt="${esc(p.title)}" loading="lazy"></button>`)
+  .join("");
+
 function thumbHTML(w) {
   if (w.img) return `<img src="${esc(w.img)}" alt="${esc(w.title)}" loading="lazy">`;
   if (w.video) return `<video src="${esc(w.video)}#t=0.5" muted playsinline preload="metadata"></video>`;
@@ -138,6 +165,16 @@ const lbPrev = $("#lb-prev"), lbNext = $("#lb-next");
 function showSlide() {
   lbMedia.innerHTML = `<img src="${esc(gal.list[gi])}" alt="${esc(gal.title)}, slide ${gi + 1}">`;
   $("#lb-count").textContent = `${gi + 1} / ${gal.list.length}`;
+  if (gal.captions) lbCap.innerHTML = `<strong>${esc(gal.captions[gi])}</strong>`;
+}
+function openPhotos(i) {
+  gal = { list: PORTFOLIO.photos.map((p) => p.src), title: "Photo", captions: PORTFOLIO.photos.map((p) => p.title) }; gi = i;
+  lb.classList.add("has-gallery");
+  showSlide();
+  lastFocus = document.activeElement;
+  lb.hidden = false;
+  document.body.style.overflow = "hidden";
+  $("#lb-close").focus();
 }
 function step(d) { if (!gal) return; gi = (gi + d + gal.list.length) % gal.list.length; showSlide(); }
 function openItem(w) {
@@ -169,6 +206,16 @@ function closeLB() {
 $("#grid").addEventListener("click", (e) => {
   const card = e.target.closest(".card");
   if (card) openItem(PORTFOLIO.work[card.dataset.i]);
+});
+$("#more-photos").textContent = `Show all ${PORTFOLIO.photos.length} photos`;
+$("#more-photos").addEventListener("click", (e) => {
+  const g = $("#photo-grid"), open = g.classList.toggle("show-all");
+  e.currentTarget.textContent = open ? "Show fewer" : `Show all ${PORTFOLIO.photos.length} photos`;
+  e.currentTarget.setAttribute("aria-expanded", open);
+});
+$("#photo-grid").addEventListener("click", (e) => {
+  const ph = e.target.closest(".photo");
+  if (ph) openPhotos(Number(ph.dataset.i));
 });
 $("#lb-close").addEventListener("click", closeLB);
 lb.addEventListener("click", (e) => { if (e.target === lb) closeLB(); });
